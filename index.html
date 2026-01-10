@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohd Ali Abbas - Portfolio</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+    :root {
+        --primary: #232f3e;  /* Dark Blue */
+        --accent: #ff9900;   /* Amazon Orange */
+        --bg: #f5f6f7;       /* Light Gray */
+        --text: #111;
+        --white: #ffffff;
+    }
+
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        padding-top: 80px; /* Space for fixed navbar */
+    }
+
+    /* --- NAVIGATION BAR --- */
+    .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background-color: var(--primary);
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        z-index: 1000;
+        box-sizing: border-box;
+    }
+
+    .nav-brand {
+        color: var(--white);
+        font-weight: bold;
+        font-size: 20px;
+        text-decoration: none;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 20px;
+    }
+
+    .nav-btn {
+        background: none;
+        border: none;
+        color: #ccc;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 500;
+        padding: 10px;
+        transition: color 0.3s;
+    }
+
+    .nav-btn:hover, .nav-btn.active {
+        color: var(--accent);
+        border-bottom: 2px solid var(--accent);
+    }
+
+    /* --- SEARCH BAR --- */
+    .search-container {
+        display: flex;
+        align-items: center;
+        background: var(--white);
+        border-radius: 4px;
+        padding: 5px;
+    }
+
+    .search-input {
+        border: none;
+        outline: none;
+        padding: 5px;
+        font-size: 14px;
+        width: 150px;
+    }
+
+    .search-btn {
+        background: var(--accent);
+        border: none;
+        color: var(--primary);
+        padding: 5px 10px;
+        border-radius: 2px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .search-btn:hover {
+        background: #e68a00;
+    }
+
+    /* --- LAYOUT CONTAINER --- */
+    .container {
+        width: 900px;
+        max-width: 95%;
+        margin: 30px auto;
+        min-height: 800px;
+    }
+
+    /* --- TAB CONTENT SYSTEM --- */
+    .tab-content {
+        display: none; /* Hidden by default */
+        animation: fadeIn 0.5s;
+    }
+
+    .tab-content.active {
+        display: block; /* Show active tab */
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- PAPER STYLING (Shared for Resume & Cover Letter) --- */
+    .paper {
+        background: var(--white);
+        display: flex;
+        box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    /* Left Panel Styling */
+    .left {
+        width: 30%;
+        background: var(--primary);
+        color: var(--white);
+        padding: 30px;
+        box-sizing: border-box;
+    }
+
+    .left h2 {
+        font-size: 16px;
+        color: var(--accent);
+        margin-top: 25px;
+        border-bottom: 1px solid var(--accent);
+        padding-bottom: 5px;
+        text-transform: uppercase;
+    }
+
+    .left p, .left li, .left a {
+        font-size: 13px;
+        line-height: 1.6;
+        color: #ddd;
+        text-decoration: none;
+    }
+
+    .left a:hover { color: var(--accent); }
+
+    /* Right Panel Styling */
+    .right {
+        width: 70%;
+        padding: 40px;
+        box-sizing: border-box;
+    }
+
+    .right h1 {
+        margin: 0;
+        font-size: 32px;
+        color: var(--primary);
+        text-transform: uppercase;
+    }
+
+    .title {
+        font-size: 18px;
+        color: var(--accent);
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .section { margin-top: 25px; }
+
+    .section h2 {
+        font-size: 18px;
+        color: var(--primary);
+        border-bottom: 2px solid var(--accent);
+        padding-bottom: 5px;
+        text-transform: uppercase;
+    }
+
+    .job-title {
+        font-weight: bold;
+        margin-top: 15px;
+        font-size: 15px;
+    }
+
+    .company { color: var(--primary); font-weight: 800; }
+    
+    .date {
+        float: right;
+        font-size: 12px;
+        color: #666;
+        background: #eee;
+        padding: 2px 6px;
+        border-radius: 4px;
+    }
+
+    .right ul { padding-left: 20px; font-size: 14px; color: #444; }
+    .right li { margin-bottom: 8px; }
+
+    /* --- COVER LETTER SPECIFIC --- */
+    .cl-body {
+        font-size: 14px;
+        line-height: 1.8;
+        color: #333;
+        margin-top: 20px;
+        white-space: pre-line; /* Preserves paragraphs */
+    }
+    
+    .cl-header {
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+    }
+
+    /* Highlight class for Search */
+    .highlight {
+        background-color: yellow;
+        color: black;
+    }
+
+</style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="#" class="nav-brand">M. Ali Abbas</a>
+        
+        <div class="nav-links">
+            <button class="nav-btn active" onclick="switchTab('resume')">Resume</button>
+            <button class="nav-btn" onclick="switchTab('coverletter')">Cover Letter</button>
+        </div>
+
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search (e.g. Java)...">
+            <button class="search-btn" onclick="performSearch()"><i class="fas fa-search"></i></button>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <div id="resume" class="tab-content active">
+            <div class="paper">
+                <div class="left">
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <i class="fas fa-user-circle" style="font-size: 80px; color: #ccc;"></i>
+                    </div>
+
+                    <h2>CONTACT</h2>
+                    <p><i class="fas fa-map-marker-alt"></i> Noida, India</p>
+                    <p><i class="fas fa-phone"></i> +91 8299288287</p>
+                    <p><i class="fas fa-envelope"></i> aliabbas9335@gmail.com</p>
+
+                    <h2>LINKS</h2>
+                    <p><i class="fab fa-github"></i> <a href="https://mohdaliabbas.github.io/">Github Profile</a></p>
+                    <p><i class="fab fa-linkedin"></i> <a href="#">LinkedIn Profile</a></p>
+
+                    <h2>EDUCATION</h2>
+                    <p><b>B.Tech</b><br>
+                    Dr. A.P.J Abdul Kalam Technical University<br>
+                    <span style="color:var(--accent)">CGPA: 7.56 / 10</span></p>
+
+                    <h2>SKILLS</h2>
+                    <p>Python, Java, Spring Boot</p>
+                    <p>SQL, MySQL, MongoDB</p>
+                    <p>Docker, Kubernetes</p>
+                    <p>Git, GitLab CI/CD</p>
+                </div>
+
+                <div class="right">
+                    <h1>MOHD ALI ABBAS</h1>
+                    <div class="title">Full-Stack Developer</div>
+
+                    <div class="section">
+                        <h2>PROFESSIONAL SUMMARY</h2>
+                        <p>
+                            Full-Stack Developer with 3+ years of experience building scalable enterprise applications.
+                            Strong expertise in Python, Java, and microservices architecture with a proven record
+                            of improving performance, reducing latency, and delivering high-quality solutions in agile environments.
+                        </p>
+                    </div>
+
+                    <div class="section">
+                        <h2>EXPERIENCE</h2>
+
+                        <div class="job-title">
+                            <span class="company">LTIMindtree Ltd.</span> - Python / Java Full Stack Developer
+                            <span class="date">June 2023 – Present</span>
+                        </div>
+                        <ul>
+                            <li>Developed Spring Boot applications on cloud, improving system performance by 76%.</li>
+                            <li>Designed REST APIs reducing integration time by 20%.</li>
+                            <li>Implemented Kafka-based real-time messaging systems.</li>
+                            <li>Reduced latency by 10% using concurrency and multithreading.</li>
+                            <li>Containerized applications using Docker and Kubernetes.</li>
+                            <li>Innovated Release team Automation and increase productivity by 40%</li>
+                        </ul>
+
+                        <div class="job-title">
+                            <span class="company">Wipro</span> - Software Engineer
+                            <span class="date">Feb 2022 – May 2022</span>
+                        </div>
+                        <ul>
+                            <li>Full stack implementation Authentication and Authorization.</li>
+                            <li>Cloud Essentials & Automated CI/CD pipelines using GitLab.</li>
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <h2>PROJECTS</h2>
+                        <ul>
+                            <li><b>Interview Kit:</b> Designed system improving efficiency by 20%.</li>
+                            <li><b>Billing Microservice:</b> Enterprise solution improving efficiency by 15%.</li>
+                            <li><b>Task Management System:</b> Increased team productivity by 20%.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="coverletter" class="tab-content">
+            <div class="paper">
+                <div class="left" style="background: #333;">
+                    <h2>SENDER</h2>
+                    <p><b>Mohd Ali Abbas</b></p>
+                    <p>Noida, India</p>
+                    <p>aliabbas9335@gmail.com</p>
+                    <br>
+                    <h2>RECIPIENT</h2>
+                    <p>Hiring Manager</p>
+                    <p>Human Resources Dept.</p>
+                </div>
+
+                <div class="right">
+                    <div class="cl-header">
+                        <h1>COVER LETTER</h1>
+                        <div class="title">Application for Full Stack Developer</div>
+                        <div class="date" style="float:none;">Date: Current</div>
+                    </div>
+
+                    <div class="cl-body">
+                        <b>Dear Hiring Manager,</b>
+
+                        I am writing to formally apply for the Full Stack Developer position. With over 3 years of hands-on experience in Java, Python, and Microservices architecture, I am keen to bring my skills, dedication, and strong work ethic to your team.
+
+                        Throughout my career at LTIMindtree and Wipro, I have prided myself on being a reliable and hardworking engineer. I have successfully improved system performance by 76% and innovated automation processes that boosted productivity by 40%. I am a quick learner who adapts easily to new environments and procedures.
+
+                        I understand the importance of punctuality and clear communication, and I always aim to perform my duties to the highest standard. In my previous experiences, I have developed strong organizational skills and the ability to work well both independently and as part of a team.
+
+                        I am available for an interview at your earliest convenience and would appreciate the opportunity to discuss how my background fits the needs of your organization.
+
+                        Sincerely,
+
+                        <b>Mohd Ali Abbas</b>
+                        +91 8299288287
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Tab Switching Logic
+        function switchTab(tabName) {
+            // Hide all tabs
+            var i, x;
+            x = document.getElementsByClassName("tab-content");
+            for (i = 0; i < x.length; i++) {
+                x[i].classList.remove("active");
+            }
+            // Remove active style from buttons
+            var btns = document.getElementsByClassName("nav-btn");
+            for (i = 0; i < btns.length; i++) {
+                btns[i].classList.remove("active");
+            }
+            
+            // Show current tab
+            document.getElementById(tabName).classList.add("active");
+            
+            // Add active style to the correct button
+            event.target.classList.add("active");
+        }
+
+        // Search Logic (Highlights text)
+        function performSearch() {
+            let input = document.getElementById("searchInput").value;
+            let container = document.querySelector(".container");
+            
+            // Remove old highlights
+            container.innerHTML = container.innerHTML.replace(/<span class="highlight">([^<]+)<\/span>/g, '$1');
+
+            if (input.trim() !== "") {
+                let regex = new RegExp(input, "gi");
+                container.innerHTML = container.innerHTML.replace(regex, function(match) {
+                    return '<span class="highlight">' + match + '</span>';
+                });
+            }
+            
+            // Re-attach event listeners is tricky with innerHTML replacement, 
+            // but for a simple static page, we just need to make sure the tab buttons still work.
+            // Note: In a complex React/Angular app, we wouldn't use innerHTML replace.
+        }
+
+        // Allow "Enter" key to trigger search
+        document.getElementById("searchInput").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                performSearch();
+            }
+        });
+    </script>
+
+</body>
+</html>
